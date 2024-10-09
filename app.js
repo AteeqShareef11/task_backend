@@ -6,30 +6,9 @@ const authRouter = require("./routes/user");
 const vehicleRouter = require("./routes/vehicle");
 const app = express();
 
-const corsOptions = {
-  origin: "https://task-frontend-snowy.vercel.app",
-  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
-  allowedHeaders: ["Authorization", "Content-Type"],
-};
-
-app.use(cors(corsOptions));
+app.use(cors("*"));
 
 app.use(express.json());
-
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", "GET,HEAD,PUT,PATCH,POST,DELETE");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
-  );
-
-  if (req.method === "OPTIONS") {
-    return res.status(200).end();
-  }
-
-  next();
-});
 
 app.use("/", authRouter);
 app.use("/", vehicleRouter);
