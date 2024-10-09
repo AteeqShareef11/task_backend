@@ -31,7 +31,9 @@ const start = async () => {
 
 const PORT = process.env.PORT || 5050;
 
-app.listen(PORT, async () => {
+const server = app.listen(PORT, async () => {
   console.log(`Server is running on port ${PORT}`);
   await start();
 });
+
+server.setTimeout(30000);
