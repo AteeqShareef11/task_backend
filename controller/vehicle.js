@@ -11,8 +11,9 @@ exports.addVehicle = async (req, res) => {
         message: "Please Provide All Required Fields",
       });
     }
-    if (req.files) {
-      const pictures = req.files.map((file) => "/" + file.path);
+    if (req.files && req.files.length > 0) {
+      const pictures = req.files.map((file) => file.path);
+
       await Vehicle.create({
         userId,
         carModel,
